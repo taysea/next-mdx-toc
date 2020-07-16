@@ -9,13 +9,9 @@ export default (frontMatter) => {
   return function docsPageLayout({ children }) {
     const size = useContext(ResponsiveContext);
     return (
-      <Box>
+      <Box margin="auto" width={{ max: "xxlarge" }}>
         <Header />
-        <Box
-          direction="row"
-          width={{ max: "xxlarge" }}
-          pad={{ horizontal: "large" }}
-        >
+        <Box direction="row" pad={{ horizontal: "large" }}>
           <Box flex overflow="auto" pad={{ right: "medium" }}>
             <Heading level={1}>{frontMatter.title}</Heading>
             <Box width={{ max: "large" }}>{children}</Box>
@@ -27,7 +23,7 @@ export default (frontMatter) => {
               height={{ min: "100%" }}
               pad={{ top: "large" }}
             >
-              <Box gap="small">
+              <Box align="start" gap="small">
                 {__scans.headings &&
                   __scans.headings.map((heading, index) => {
                     const formattedHeading = heading.replace(/^#+\s/g, "");

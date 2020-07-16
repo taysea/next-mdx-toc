@@ -4,7 +4,7 @@ import { Header } from "../components/Header";
 
 export const GenericLayout = ({ ...props }) => {
   return (
-    <Box fill>
+    <Box margin="auto" width={{ max: "xxlarge" }} fill>
       <Header />
       <Box fill {...props} />
     </Box>

@@ -31,7 +31,6 @@ export default function Page() {
   return (
     <GenericLayout>
       <Box
-        background="accent-4"
         onMouseMove={onMove}
         height="100vh"
         pad={{ horizontal: "large", top: "large" }}
@@ -44,7 +43,7 @@ export default function Page() {
             Hi there!
           </Heading>
           <Heading margin={{ bottom: "large", top: "none" }} level={2}>
-            It's nice to meet you.
+            We're glad you're here.
           </Heading>
           <Box align="start" gap="small">
             <Text>Here are some topics to get you started with Grommet:</Text>
