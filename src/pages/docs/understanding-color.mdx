@@ -1,0 +1,198 @@
+---
+title: "Color properties"
+---
+
+## Basics
+
+To best understand how colors are used in Grommet, let's start by introducing the base theme.
+
+The [base.js]('https://github.com/grommet/grommet/blob/81be805abc8bc9f905eb82a43e069a702a17c815/src/js/themes/base.js') theme contains an object of default colors that are used to style Grommet applications. These color definitions help Grommet projects maintain consistency.
+
+Don’t worry though! All of the colors defined by the base theme can be altered to fit your application. This doc will explain how to apply colors using component properties as well as how to define your own colors to customize your application.
+
+## Colors
+
+The [Grommet color palette](https://v2.grommet.io/color) lists all of the default colors used in the base theme. That page lists the string names of each color as well as the hex color code. While themes come with default colors, you can alter the color values to customize your project. For example, while Grommet's brand color is purple, you can change the theme brand color to a color of your choice. For example:
+
+`const brandColor = '#FFC0CB'; // pink`
+
+This switches the brand color from the default purple to a pink. Now, when the brand color is used, it will be this pink instead of the default purple.
+
+## Dark and Light properties
+
+Grommet has a built-in function that checks whether or not the background of a component is light or dark. Hence, our color props can accept an object containing color values for dark and light cases.
+For example, you might say `{dark: ‘light-1’, light: ‘light-4’}.` In this case, if the background is dark, the contained text or icons will be `light-1.` If the background is light, the contained text or icon elements will be `light-4`.
+
+### NEW
+
+Semantically, the user can define her own colors to support an app toggle between dark and light mode while maintaining accessibility constraints (contrast wise).
+For example, Let's say we are using blue in our app, and we are adding the color `blue` to our custom theme global colors as follows:
+`blue: { dark: '#0E5265', light: '#00C8FF'}`, blue will toggle between dark and light mode according to its background.
+But in some cases, we would like to have a dominant blue, without the dark and light toggle, in this case, we will add the color `blue!` to the theme as follows:
+`'blue!': '#00739D'`
+We will refer to this color each time we would like the same dominant blue color, no matter if the background is dark or light.
+To summarize, using the following:
+`<Text color="blue!"> Hi </Text>` // will always show the same blue color as defined on the theme
+`<Text color="blue"> Hi </Text>` // will toggle between dark and light mode according to a given background
+
+## Background prop
+
+Some Grommet components have props that accept colors as their value. For example, **Box** has a prop called _background_ which affects the background color of the box.
+
+The background prop accepts either a string or an object. When provided with a string, the string must contain one of the following: a color defined in the theme, a hex color code, a decimal code, a CSS color name, or a 'url()' for an image. Here are some examples:
+
+`background = 'brand'`
+`background = '#FFB6C1'`
+`background = 'rgb(255, 182, 193)'`
+`background = 'pink'`
+`background = "url(//my.com/assets/img.png)"`
+
+The background prop also accepts an object. This object can contain an image, position, opacity, and/or color.
+
+```
+background={{
+  "color": "neutral-1",
+  "dark": true,
+  "opacity": true,
+  "position": "bottom",
+  "image": "url(//my.com/assets/img.png)"}}
+
+```
+
+To help with readability, you can also designate different background colors that will render depending on if the Box is on a light or dark component.
+
+`background={{"dark": "light-2", "light": "dark-2"}}`
+
+Similar to the _background_ prop on Box, **Button** has a _hoverIndicator_ prop that accepts the same options of string or object. In the context of a Button, these values will affect the color of the Button when it hovers over.
+
+## NEW Background Theme Prop
+
+Starting from Grommet ^2.11.0, new theme colors with the prefix of background-\* were added:
+
+```
+      'background-back': {
+        dark: '#1A1F2B',
+        light: '#EFEFEF',
+      },
+      'background-contrast': {
+        dark: '#FFFFFF08',
+        light: '#11111108',
+      },
+      'background-front': {
+        dark: '#222938',
+        light: '#FFFFFF',
+      },
+```
+
+What is the functional value of those colors?
+
+Let's say you are building a Landing page. You would then specify the general layout background color of the application as `background-back` since it resides on the back of the application. Any sectional item (Tile/Card) inside of the layout would use the `background-front` color to stand-out from the background-back and emphasize the contrast between the back and front elements. The base-theme will calculate the contrast between the back and front on either a dark or light mode.
+
+So far, we have a page with a background-back color and some Card elements that use the background-front.
+Another use case is to have an additional level of contrast within the Card itself to accent the content (for example, a footer or a header on the Card). The color, in this case, will be `background-contrast` to lightly distinguish it from its background using an opacity.
+
+But wait?! what happens if you need more layers of back and front in your application?
+You can always add more background colors to your theme `global.colors` manually and reference these colors in a similar fashion.
+
+Too many words? see a [LIVE Code Example](https://codesandbox.io/s/background-theme-zk0fc).
+
+## Type Components and Color Props
+
+Color can affect text components such as **Heading**, **Text**, **Paragraph** and **Anchor**. Each of these components has a _color_ prop that, like Box, accepts either a string or an object.
+
+When provided with a string, the value must contain one of the following: a color defined in the theme, a hex color code, a decimal code, or a CSS color name.
+
+`color = 'pink'`
+`color = 'brand'`
+`color = '#FFB6C1'`
+
+The color prop also accepts an object that contains light/dark color options. See the above "Color Props" section for an explanation on light and dark. Here is an example of how you could have pink text when on a light background and brand colored texted when on a dark background.
+
+`color = {{light: 'pink', dark: 'brand'}}`
+
+There are a couple of other components that also have a _color_ prop:
+
+- **RangeSelector** and **WorldMap** have a color prop that accepts the same options explained in this section
+
+- **Chart** has a color prop that accepts the same options as explained in this section as well as an opacity value. For example:
+
+`color = {{"color": "accent-1", "opacity": true}}`
+
+## Theme Colors
+
+As mentioned in the first section, the base theme contains an object of default colors that style Grommet applications. However, you can edit the values of these colors to customize the styling of your project. If you'd like a more detailed tutorial about how to create your own theme, you can look at the documentation about [theme customization](https://github.com/grommet/grommet/wiki/Grommet-v2-theming-documentation). This doc explains how to get started and explains the process of using `deepMerge` to merge your custom theme with the base theme.
+
+In Grommet, `accent` and `neutral` are prefixes used to name the default colors. If you look into the [base.js](https://github.com/grommet/grommet/blob/master/src/js/themes/base.js) theme, you will see what values are declared for each of the accent and neutral [color names]('https://v2.grommet.io/color').
+
+In addition to the accent and neutral colors, there are other color values defined by the base theme for styling border, focus, text, and icon colors. Like the accent and neutral colors, these colors can also easily be changed.
+
+Let's look at an example where the goal is to change the color of a [selected](https://github.com/grommet/grommet/blob/81be805abc8bc9f905eb82a43e069a702a17c815/src/js/themes/base.js#L66) item in a Select component. This file shows that in the **Select** component, when an item is selected, it will be the brand color. Here's how this style could be changed to a different color:
+
+```
+  const colors = {
+  brand: 'pink',
+  selected: "#008080"
+};
+
+const customTheme = deepMerge(grommet, {
+  global: {
+    colors
+  }
+});
+
+```
+
+In this example, both the `brand` and `selected` color have been changed. However, in order to use these customizations, you need to use a custom theme.
+This can be done by passing `customTheme` to the _theme_ prop in your `Grommet`
+component: `<Grommet theme={customTheme}>`. For more help on theme customization, read [this](https://github.com/grommet/grommet/wiki/Grommet-v2-theming-documentation).
+
+## Global properties
+
+In the base theme, there are global properties that can be defined to affect various styles such as hover states. For example, the [base.js](https://github.com/grommet/grommet/blob/81be805abc8bc9f905eb82a43e069a702a17c815/src/js/themes/base.js#L232) file shows that there is a global hover color that is defined as `color: 'active'`. users can change both the background of the hover as well as the text color which is stated as
+
+```
+hover: {
+    color: {
+        dark: 'white'
+        light: 'black'
+    }
+}
+
+```
+
+The other global properties such as focus border color and active background color can also be changed in the same way.
+
+## Component themes
+
+Components have styles that are defined by the theme. For example, **Button** has button.border.color, button.color and others that are listed in the [Button docs](https://v2.grommet.io/button#button.border.color). All of these color styles can be changed by creating a custom theme. If you wanted to change the color of the text label, you would simply add the following to your custom theme:
+
+```
+const customTheme = deepMerge(grommet, {
+  button: {
+    color: 'blue'
+  }
+});
+
+```
+
+Once you apply the above `customTheme` to your application, every button text will be blue.
+
+Some of the components already have default colors for certain component attributes. For example, we can look at **Checkbox** in the [base.js](https://github.com/grommet/grommet/blob/81be805abc8bc9f905eb82a43e069a702a17c815/src/js/themes/base.js#L362) file. By default, the border color is set to a certain color when the checkbox is unchecked. See more about that in the [Checkbox docs](https://v2.grommet.io/checkbox#checkBox.border.color). However, you could override these colors in your custom theme like this:
+
+```
+const customTheme = {
+  checkBox: {
+    border: {
+      color: {
+        dark: "blue",
+        light: "green"
+      }
+    }
+  }
+};
+
+```
+
+## Theme advantages
+
+All the colors defined in the base theme can be changed to fit the style or needs of your application. This document explains how colors are accepted by properties in various components and how you can use colors to enhance and customize your application.

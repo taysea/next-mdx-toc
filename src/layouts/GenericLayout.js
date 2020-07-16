@@ -6,7 +6,7 @@ export const GenericLayout = ({ ...props }) => {
   return (
     <Box fill>
       <Header />
-      <Box pad="medium" {...props} />
+      <Box fill {...props} />
     </Box>
   );
 };
