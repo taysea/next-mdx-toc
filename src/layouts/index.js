@@ -9,7 +9,7 @@ export default (frontMatter) => {
   return function docsPageLayout({ children }) {
     const size = useContext(ResponsiveContext);
     return (
-      <Box margin="auto" width={{ max: "xxlarge" }}>
+      <Box margin="auto" width={{ max: "xxlarge" }} height={{ min: "100vh" }}>
         <Header />
         <Box direction="row" pad={{ horizontal: "large" }}>
           <Box flex overflow="auto" pad={{ right: "medium" }}>
