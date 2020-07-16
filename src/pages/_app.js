@@ -1,9 +1,8 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import PropTypes from "prop-types";
-import { grommet, Grommet, Heading } from "grommet";
+import { grommet, Grommet } from "grommet";
 import components from "../components/MDXComponents";
-// import { components } from "../components";
 
 /* _app.js allows for customizing Next.js's default <App> component
  * Details: https://nextjs.org/docs/advanced-features/custom-app
@@ -12,7 +11,6 @@ import components from "../components/MDXComponents";
  * navigate between routes, `Component` will change to the new `page`.
  */
 function App({ Component, pageProps }) {
-  // for all other pages, we build the page with Layout in the .js file
   return (
     <Grommet theme={grommet} full>
       <MDXProvider components={components}>
