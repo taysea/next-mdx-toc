@@ -36,7 +36,7 @@ export default function Page() {
         pad={{ horizontal: "large", top: "large" }}
         direction={size !== "small" ? "row" : "column"}
         gap="medium"
-        fill
+        overflow="hidden"
       >
         <Box flex>
           <Heading margin="none" size="large">
