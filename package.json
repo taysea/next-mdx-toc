@@ -10,7 +10,7 @@
   "dependencies": {
     "grommet": "^2.14.0",
     "grommet-icons": "^4.4.0",
-    "next": "9.4.4",
+    "next": "11.1.0",
     "next-compose-plugins": "^2.2.0",
     "next-mdx-enhanced": "^3.0.0",
     "react": "16.13.1",
